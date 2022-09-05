@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV=REFRESH CONTENT=36000>  
+<link rel="stylesheet" type="text/css" href="../../atchem.css">
+  <style></style>
+  <title>AtChem on-line help</title>
+</head>
+
+<body>
+
+<div class="titlebar">
+<h1>AtChem on–line</h1>
+<p id="version">version 1.1</p>
+</div>
+
+<div id="container">
+
+<h1>Help</h1>
+<h2>About AtChem on–line</h2>
+
+<p>
+AtChem on–line is a tool for running simulations of Master Chemical Mechanism using just your web browser, no installation is required. 
+The user needs to supply two files: one with the chemical reactions and one with initial concentrations, change other parameters if necessary and press “Submit”. A link to a zip file with the results should appear soon.
+</p>
+
+<p>Currently there is one login 
+for everyone – this will be changed in the future and users will need 
+to register to receive an individual login. Until then, remember that everyone can access your data.
+</p>
+
+<p>
+On the home page you can find links to example input files.
+The set “simplest” describes a very simple model with one reaction. 
+The set “allfiles” defines a larger model and contains all possible types of input file. The format of input files is described in detail below.
+</p>
+  <p>There is an online tutorial designed to lead you through the features of the AtChem on-line tool. It is available on the <a href="http://mcm.leeds.ac.uk/MCM/atchem_tut/tutorial_intro.htt">MCM website</a></p>
+
+<h2>Input data files</h2>
+
+<h3>Mechanism file</h3>
+<p>
+<i>Mandatory.</i>
+This file contains the chemical mechanism you wish to use. It must have extension “.fac”. All the 
+reactions must be described in facsimile format, i.e. reaction rate, substrates and products, separated by signs “% : = ;”, i.e.
+<br>
+<code>% k : A + B + ... = C + D + ... ;</code>
+<br>
+The file must also contain the peroxy radical sum, i.e.<br>
+<code>RO2 = RO2a + RO2b +...;</code> 
+<br>
+If there are no peroxy radicals, an empty sum should be used. 
+Lines which do not start with “%” nor with “RO2=” are ignored.
+</p>
+
+<p>
+Below is an example of a very simple mechanism file. The mechanism described contains only one reaction, A–>C occuring with reaction rate 1E-4 and there are no peroxy radicals.</p>
+<pre>
+* ------------------------------------------------------------------- *;
+* SIMPLEST MECHANISM                                                  *;
+* ------------------------------------------------------------------- *;
+RO2 =;
+% 1e-4 : A = C ;
+</pre>
+<p>
+A more complex example of mechanism file can be viewed <a href="https://atchem.leeds.ac.uk/run/exdata/allfiles/mech.fac">here</a>.
+Subset mechanisms from the <a href="http://mcm.leeds.ac.uk/MCM/extract.htt">MCM website</a> should be downloaded in Facsimile format and are suitable for direct input to the model. <br>
+</p>
+
+<h3>Initial concentration file</h3>
+<p><i>Mandatory.</i> 
+This file must have extension <b>“.config”</b>. It should contain two columns: first with MCM names of the species and second with the concentration in molecules 
+cm<sup>-3</sup>. Concentration of -1 means end of input – anything following will be ignored. An example of initial concentration file is below.
+</p> 
+<pre>
+ O          2192.515962496984
+ O3         5.356756840167577E+11
+ NO3        14010.124722567038
+end         -1
+all below is ignored
+ NO         1.0992718929324424E+8
+ NO2        1.8473660738403264E+09
+</pre>
+
+<p>Any species not included in 
+this file will initialize with a default value of 0. It is not necessary 
+to initialize species which are going to be constrained. Environmental 
+variables have separate input fields below and should not be included in this file. <br>
+</p>
+
+<h3>Constraints</h3>
+<p>
+There are two types of constraints: species constraints and environmental 
+constraints. These are provided as two zip files which contain a separate 
+file for each constraint. Constraints can be provided on different timescales 
+e.g. data every minute for NO and every hour for VOCs. The solver will 
+interpolate between data points for less frequent data. </p>
+<p><b>Important: When using constraining 
+data the model start and stop time must be within the range of the constraining 
+data to avoid undefined solver behaviour.</b> The model start time is 
+set in the model parameters section and the end time is determined by 
+the size and number of steps. <br></p>
+
+<h3>Species constraints file</h3>
+<p><i>Optional.</i> 
+This is a zip file containing data for any species you wish 
+to constrain. The data for each species is contained in a separate file 
+which is named with the MCM name for the species e.g. CH3COCH3. The 
+first line of each file should be the number of data points contained 
+in the file. Following this each line should have 2 numbers separated 
+by spaces; the first number is the time that the data point occurs at 
+in seconds, the second number is the species concentration in molecules 
+cm<sup>-3</sup>. </p>
+<p>All the data files should be 
+placed in 1 zipped file with the file extension “.zip” <br>
+</p>
+<h3>Environmental constraints file</h3>
+<p><i>Optional.</i> This is a zip file containing data for any environmental 
+parameter you wish to constrain and the files have the same format as 
+the species constraints. The environmental constraints are temperature, 
+H2O, relative humidity (RH) (NB only 1 of H2O and RH should be provided 
+to the model), pressure, M, dilution rate (DILUTE), declination angle 
+(DEC), boundary layer height, JFAC, ROOFOPEN and photolysis rates. With 
+the exception of the photolysis rates if these parameters are being 
+constrained then the appropriate input in the Environment variables 
+section should be set to CONSTRAINED <br></p>
+
+<h3>Concentration output file</h3>
+<p><i>Optional.</i>
+This is a file specifying which species concentrations you 
+would like outputting from the model. It should be a list of MCM species 
+names, 1 per line. This file should have the file extension “.config”</p>
+<p>If this file is not provided 
+by the user then the output will default to the same species as those 
+in the initial concentrations file. The frequency of the output can 
+be set in the model parameters section. <br></p>
+  
+<h3>Photolysis rates</h3>
+<p><i>Optional.</i>
+This file allows the user to specify a different photolysis rate parameterization 
+to the default parameterization used in the MCM. The format should use 
+the same 3 parameter configuration (J = l*cosX@m*EXP(-n*secX) ) and the file should have the extension'.rates'</p>
+  <p>Example file: <a href="https://atchem.leeds.ac.uk/run/exdata/allfiles/photolysis_rates.rates" target="_blank">https://atchem.leeds.ac.uk/run/exdata/allfiles/photolysis_rates.rates</a>  <br></p>
+ <p> The photolysis rates file can also be used to specify a constant rate for each photolysis rate. The format for this file is number, rate coefficeint and name and the file should have the extension '.const'</p>
+<p>Example file: <a href="https://atchem.leeds.ac.uk/run/exdata/allfiles/photolysis_rates.const" target="_blank">https://atchem.leeds.ac.uk/run/exdata/allfiles/photolysis_rates.const</a>  <br></p>
+<h2>Environment variables</h2>
+  
+<p>These can be given a fixed 
+value or constrained to a data file provided in the environmental constraints 
+zip file (set value to CONSTRAINED). Some variables (specified below) can be ignored (set value to NOTUSED). Some environmental variables can also be calculated by the model.
+To use this feature the value should be set to CALC and the necessary additional inputs must be given; details of required inputs are given below. <br>
+</p>
+<p><b>M:</b> Number of air molecules (molecules cm<sup>-3</sup>)</p>
+  <p>    Can be calculated, requires temperature and pressure to be provided</p>
+  <p> Cannot be NOTUSED</p>
+  <p>    Default value=2.60e+19  </p>
+  <p><b>TEMP:</b> Temperature (K)  </p>
+  <p> Must be provided as a fixed value or constrained. CANNOT be calculated or NOTUSED
+  Default value=281.95</p>
+  <p><b>Pressure:</b> Torr   </p>
+  Cannot be calculated. Default value= NOTUSED</p>
+
+  <p><b>RH:</b> Relative humidity </p>
+  <p> Cannot be calculated but can be NOTUSED provided H2O is given
+(%)  Default value= NOTUSED</p>
+<p><b>H2O:</b> Water concentration (molecules cm<sup>-3</sup>)</p>
+  <p>    Can be calculated, requires relative humidity to be provided</p>
+  <p> Can be NOTUSED provided RH is given
+  <p>    Default value=3.06e+17 </p>
+<p><b>DEC:</b> Declination of 
+the sun (radians)</p>
+  <p>    Can be calculated, requires date to be provided</p>
+
+  <p>    Cannot be set to "NOTUSED", must be fixed, constrained or calculated.</p>
+      <p>    Default value=0.28782328e+00  </p>
+<p><b>BOUNDARYLAYERHEIGHT:</b> 
+Allows user to set the boundary layer height </p>
+  <p>  
+  Cannot be calculated.
+  Default value= NOTUSED</p>
+<p><b>DILUTE:</b> Dilution rate 
+(s<sup>-1</sup>) </p>
+  <p> 
+  Cannot be calculated. Can be NOTUSED Default value= 6.77E-6</p>
+
+<p><b>JFAC:</b> Factor used to 
+correct calculated photolysis rates e.g. to adjust for cloudiness</p>
+  <p>    Can be calculated by comparing a measured photolysis rate to that calculated by the model
+    (currently only works for JNO2) requires JFAC species to be set and constraining data for this photolysis rate to be provided</p>
+  <p>    Default value=NOTUSED  </p>
+<p><b>ROOFOPEN</b>: Flag to turn 
+photolysis rates on or off 0=off, 1=on. </p>
+  <p> 
+  Cannot be calculated. Can be NOTUSED. Default value is 1 <br>
+</p>
+<h2>Model Parameters</h2>
+<p><b>Number of steps and step 
+size:</b> The total time of the model run is determined by the number 
+of steps and the step size. The step size controls how often the concentration 
+output is produced. To run a model for 2 hours with output every 5 minutes 
+would require a step size 300s and 24 steps <br></p>
+
+<p><b>Max nr. of constrained species 
+and Max. nr of constrained species</b>:</p>
+<p>These control the maximum size 
+of a constraint file and maximum number of constrained species and can 
+usually be left as the default values <br></p>
+<p><b>Rates output step size</b>: 
+Frequency of output for the production and loss rates (seconds) <br>
+</p>
+<p><b>Model start time</b>: Seconds. 
+If using constraining data the model start time must be within the range 
+of the constraint data and the total run time of the model (determined 
+by the number of steps and the step size) must give a model end time 
+which is also within the range of the constraining data. <br>
+</p>
+<p><b>Jacobian output step size</b>: 
+As this output is not commonly used it defaults to twice the model run 
+time so it isn’t produced. This should only be altered if it is required 
+and will produce very large files so should not be output too frequently 
+as this may cause large models to crash. <br></p>
+
+<p><b>Latitude and longitude</b>: 
+Should be set to the location of the experiment  <br></p>
+<p><b>Day, month and year</b>: 
+Should be set to the date of the experiment <br></p>
+<p><b>Inst. Rates output step 
+size</b>: Frequency of output for the instantaneous rates for every 
+reaction in the model (seconds). The output is produced as 1 file for 
+each step and the name of the file corresponds to the time in seconds <br>
+</p>
+<h2>Other</h2>
+
+<p><b>Job name</b> – Only use 
+A-Z0-9_– characters and do not use spaces. The server will append an 
+integer to the name to ensure that each job has a unique ID. <br>
+
+</p>
+<p><b>Description</b> – this 
+can be used to record any information you like about the model and is 
+optional. <br></p>
+
+<p><b>JFAC species:</b> Used to 
+compare a constrained photolysis rate to the photolysis rate calculated 
+by the model. The factor by which they differ is used to correct the 
+other calculated photolysis rates. <br></p>
+<p><b>Production and Loss rates 
+output:</b> These are used to specify which species the production and 
+loss rates should be output for.  <br></p>
+
+<h2>Further help</h2>
+
+<p>This application is still under 
+development and any feedback you have will be appreciated. </p>
+
+<p>If you have any problems then 
+please contact us with the job name as this will help us to trace the 
+problem. <br></p>
+<a name="0.1_table01"></a>
+
+<div align="left">
+  <table width="650">
+  <tr valign="top">
+  <td>
+  Katarzyna Borońska<br>
+  E–mail: <a href="mailto:k.boronska@leeds.ac.uk">k.boronska@leeds.ac.uk</a> <br>
+  Telephone: +44 113 343 5324</td>
+  
+  <td>Jenny Young<br>
+  E–mail: <a href="mailto:J.C.Young@leeds.ac.uk">J.C.Young@leeds.ac.uk</a><br>
+  Telephone: +44 113 343 6486</td></tr>
+  </table>
+</div>
+
+
+</div>
+<div class="homelink"><a href="https://atchem.leeds.ac.uk/">AtChem on–line project</a></div>
+</body></html>

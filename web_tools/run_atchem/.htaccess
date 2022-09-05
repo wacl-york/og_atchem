@@ -1,0 +1,5 @@
+DirectoryIndex index.html index.py
+AddHandler mod_python .py
+   PythonHandler mod_python.publisher
+   PythonDebug On
+

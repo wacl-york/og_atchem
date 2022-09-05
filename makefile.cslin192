@@ -1,0 +1,4 @@
+# gfortran flags
+F77      =  gfortran 
+FFLAGS   =  -ffree-form -Wall -m32
+LIBDIR   = /usr/not-backed-up/kb/CVODE_32/lib

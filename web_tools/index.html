@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <link rel="stylesheet" type="text/css" href="atchem.css">
+  <TITLE>AtChem on-line project home page</TITLE>
+</HEAD>
+<BODY LANG="en-GB" DIR="LTR">
+<div class="titlebar">
+<h1>AtChem on-line project</h1>
+<p id="version">Master Chemical Mechanism simulation on-line </p>
+</div>
+<div id="container">
+<H3>Outline</H3>
+<P>We run the AtChem code as a web service,
+thus making the MCM simulation of atmosphere chemistry phenomena
+accessible to other members of the EUROCHAMP group.</P>
+<h3>Curent version</h3>
+<p class="important"><a href="run/">Run AtChem on-line</a></p>
+<p>New in version 1.5:
+<ul>
+<li>Option to alter O2 and N2 concentrations - see help page for furhter details.</li>
+</ul>
+</p>
+<p>New in version 1.4:
+<ul>
+<li>Evolution of the concentration is plotted for several species.</li>
+<li>Output is less verbose.</li>
+</ul>
+</p>
+<p>New in version 1.3:
+<ul>
+<li>Generic rates can be defined in the mechanism file.</li>
+<li>Number of photolysis rates can vary (was hard-coded 35).</li>
+<li>Photolysis constants can be provided in a file with extension “.const” (see below).</li>
+<li>Extension “.config” is no longer accepted for photolysis rates – please use “.rates”.</li>
+<li>RO2 sum is saved in file envVar.output.</li>
+<li>Output is less verbose.</li>
+<li>Header of photolysis rates output file is fixed.</li>
+<li>Instantaneous rates are output at correct intervals.</li>
+</ul>
+Warning! Instead of photolysisRates.config you should now provide either photolysisRates.rates (format unchanged) or photolysisRates.const with J/L/N columns (number/rate/name).
+</p>
+<p>You can still use the previous version: <i><a href="https://atchem.leeds.ac.uk/old/v_1.4">v.1.4</a></i></p>
+
+<h3>Sample data</h3>
+<p>
+<ul>
+<li><a href="https://atchem.leeds.ac.uk/run/exdata/allfiles">allfiles</a>: a large set of data, containing all input files</li> 
+<li><a href="https://atchem.leeds.ac.uk/run/exdata/simplest">simplest</a>: dataset describing reaction A - &gt; C with rate coefficient 1e-4</li>
+</ul>
+</p>
+<H3>Source code</H3>
+<P>The core code is written by Chris Martin in Fortran 90 and uses
+an open-source library CVODE, providing rapid solvers of ODE systems.
+The Python wrapper, written by Kasia Borońska, takes care of converting the input data, running the simulation on the server and displaying links to zipped output files. You can download a current version of AtChem from <a href="https://atchem.leeds.ac.uk/sources/">https://atchem.leeds.ac.uk/sources</a>.
+<!--Currently the svn repository is on the chmlin10 server. 
+</P>
+<P>You can download a recent snapshot of the code here:
+<A HREF="atchem.tar.gz">atchem.tar.gz</A>.</P>
+<P>As for the write access, for now it is only accessible for members of mjp group with accounts on chmlin10 (this might be changed soon). (replace username by your login). 
+-->
+<h3>Documentation</H3>
+<P>
+Using the on-line version is straightforward. User uploads the mechanism file (in FACSIMILE format), initial concentrations file and, optionally, some configuration files, set environment variables and model parameters. It is also possible to enter the job name and a short description. After pressing "submit", the simulation will be run on the server and links to input and output files will be displayed, along with a unique job ID.
+<!--
+We shall try to generate the documentation with a tool like
+Doxygen. For now, some notes about compiling the code with the CVODE
+libraries and about the general state of the project can be found in
+<A HREF="kb_log/kb_log_coding_project.odt">Kasia’s log file.</A> (Open Document format).
+-->
+</P>
+<H3>People involved</H3>
+<ul>
+<li><a href="http://www.comp.leeds.ac.uk/kb/">Kasia Borońska</a></li>
+<li><a href="http://www.comp.leeds.ac.uk/pkj/">Peter Jimack</a></li>
+<li><a href="http://www.chem.leeds.ac.uk/People/Pilling.html">Mike Pilling</a></li>
+<li>Andrew Rickard</li>
+<li>Monica V&aacute;zquez Moreno</li>
+<li><a href="http://www.chem.leeds.ac.uk/People/Waller.html">David Waller</a></li>
+<li>Jennifer Young</li>
+</ul>
+</div>
+</BODY>
+</HTML>

@@ -1,0 +1,119 @@
+body 
+{
+background-color: #F0FFF0;
+color: Black;
+font-family: sans-serif;
+text-align: center; 
+padding: 0cm 0cm;
+margin: 0px 0px 0px 0px;
+}
+
+#container {
+max-width: 68em; 
+margin: 0 auto;
+text-align: left; 
+padding-left: 1em;
+padding-right: 1em;
+}
+
+#pre {overflow: visible; background-color: white ;  font-family: courier, monospace, fixed;}
+
+#version {
+font-style: italic;
+}
+
+div.uploads {
+text-align: center;
+}
+
+pre {
+background-color: White;
+color: Black;
+overflow: auto
+}
+
+pre.command {
+color: White;
+background-color: Gray;
+font-weight: bold;
+font-family: "Courier New", Courier, monospace;
+margin-left: 2em;
+}
+
+.uploads p { text-align: left }
+.uploads A { display:block; width: 12em; padding: 2px 2px; text-align: center; border: 4px outset ; margin-left: 2em; color: #00008B; background: #E0FFFF; text-decoration: none;}
+.uploads A:link {}
+.uploads A:hover {background: Blue; color: White;}
+
+div.titlebar {
+background-color: #1E90FF;
+background-image:url('eurochamp2.png');
+background-repeat:no-repeat;
+background-position:bottom right;
+padding-left: 2em;
+padding-top: 1em;
+padding-bottom: 1em;
+color: Black;
+font-weight: bold;
+text-align: left;
+margin: 0px 0px 0px 0px;
+}
+
+.homelink {
+	font-style: italic;
+}
+
+.right {
+	margin-right: 0px;
+	text-align: right;
+}
+
+div.homelink {
+	text-align: left;
+	padding-top: 2em;
+	padding-left: 2em;
+}
+
+p.important{font-weight: bold}
+
+label
+{
+width: 19em;
+float: left;
+text-align: right;
+margin-right: 0.5em;
+display: block
+}
+
+
+input
+{
+border: 1px solid #781351;
+}
+
+.radio input
+{
+border: none;
+}
+
+.short input
+{
+	width: 7em;
+}
+
+.long input
+{
+	width: 17em;
+}
+
+.submit input
+{
+margin-left: 20em;
+color: Black; 
+font-weight: bold;
+background: #7FFFD4;
+border: 2px outset Navy;
+width: 7em; 
+}
+
+
