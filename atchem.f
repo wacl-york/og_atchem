@@ -96,9 +96,11 @@ PROGRAM ATCHEM
     character(10) svn_revision
 		    
 !    MISC
-    character(len=40) :: solverTypeName(3) = (/'SPGMR', 'SPGMR + Banded Preconditioner', 'Dense'/)
-    character(len=40) :: InterpolationMethodName(4) = (/'cubic spline', 'cubic spline ln',  &
-       'piecewise constant', 'piecewise linear' /)
+    character(len=40) :: solverTypeName(3) = [character(len=40) :: &
+            'SPGMR', 'SPGMR + Banded Preconditioner', 'Dense']
+    character(len=40) :: InterpolationMethodName(4) = &
+            [character(len=40) :: 'cubic spline', 'cubic spline ln', &
+            'piecewise constant', 'piecewise linear']
 
 !    ********************************************************************************************************
 !    MODEL SETUP AND CONFIGURATION
