@@ -1,5 +1,5 @@
 # make settings for atchem machine
 F77      =  gfortran 
 FFLAGS   =  -ffree-form -Wall 
-LIBDIR   = /var/www/html/mcm/CVODE/lib
+LIBDIR   = /opt/atchem/SUNDIALS-2.4.0/lib
 
