@@ -572,9 +572,9 @@ flush(6)
     DEALLOCATE (y, speciesName, concSpeciesName,speciesNumber,z,concentration)
     DEALLOCATE (prodIntSpecies,returnArray,reacIntSpecies)
     DEALLOCATE (SORNumber, yInt, prodIntName,reacIntName,speciesOutputRequired)
-    if ALLOCATED(fy) then
-      DEALLOCATE (fy)
-    ENDIF
+    if (ALLOCATED(fy)) then
+      DEALLOCATE(fy)
+    END IF
     DEALLOCATE (culmSpeciesProduced, culmReactionNumber,culmRates,ir)
     DEALLOCATE (culmSpeciesLoss, culmReactionNumberLoss,  culmRatesLoss)
     DEALLOCATE(lossRates,productionRates)
