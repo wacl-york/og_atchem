@@ -212,6 +212,8 @@ subroutine jfy(ny,nr,y,fy,t)
     double precision  p(nr), fy(ny,*),y(*),r(nr),t
     integer j, is
 
+    ! klcm500
+    write(*, *) "ny: ", ny
     ! set jacobian matrix to zero
     fy(1:ny, 1:ny)=0.0
 
@@ -233,6 +235,7 @@ subroutine jfy(ny,nr,y,fy,t)
             endif
         enddo
         do is=1,csize1
+            write(*, *) "chrs(2, is): ", crhs(2, is)
             fy(clhs(2,is),j)=fy(clhs(2,is),j)-clhs(3,is)*r(clhs(1,is))
         enddo
         do is=1,csize2

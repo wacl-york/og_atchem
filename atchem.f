@@ -475,6 +475,9 @@ flush(6)
 
         ! OUTPUT JACOBIAN MATRIX (OUTPUT FREQUENCY SET IN MODEL PARAMETERS)
         write(*,*)'time = ', time
+        write(*, *) "klcm500 ========"
+        write(*, *) "fy SHAPE: ", SHAPE(fy)
+
         if (mod(elapsed,jacobianOutputStepSize).EQ.0) then
             call jfy(np,numReactions,y,fy,t)
             call outputjfy(fy,np,t)
