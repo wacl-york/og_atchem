@@ -146,6 +146,9 @@ PROGRAM ATCHEM
     ALLOCATE (prodIntSpecies(np,prodLossArrayLen),returnArray(np),reacIntSpecies(np,prodLossArrayLen))
     ALLOCATE (SORNumber(np), yInt(np), prodIntName(np),reacIntName(np),speciesOutputRequired(np))
     ALLOCATE (fy(np,np))
+    write(*, *) "klcm500 ========"
+    write(*, *) "np: ", np
+    write(*, *) "fy SHAPE: ", SHAPE(fy)
 !    SET  ARRAY SIZES = NO. OF REACTIONS
     ALLOCATE (culmSpeciesProduced(numReactions), culmReactionNumber(numReactions),culmRates(numReactions))
     ALLOCATE (culmSpeciesLoss(numReactions), culmReactionNumberLoss(numReactions),  culmRatesLoss(numReactions))
@@ -475,8 +478,6 @@ flush(6)
 
         ! OUTPUT JACOBIAN MATRIX (OUTPUT FREQUENCY SET IN MODEL PARAMETERS)
         write(*,*)'time = ', time
-        write(*, *) "klcm500 ========"
-        write(*, *) "fy SHAPE: ", SHAPE(fy)
 
         if (mod(elapsed,jacobianOutputStepSize).EQ.0) then
             call jfy(np,numReactions,y,fy,t)
