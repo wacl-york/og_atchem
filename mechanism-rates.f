@@ -14,7 +14,7 @@ subroutine mechanism_rates(p,t,y,mnsp)
     double precision:: kro2no3, temp
     double precision:: m, o2, n2, h2o, k0, ki, fc, f, k1, k2, k3, k4, kmt01, kmt02
     double precision:: kmt03, kmt04, kmt05, kmt06, kmt07, kmt08, kmt09,kmt10,kmt11
-    double precision:: kmt12, kmt13, kmt14, kmt15, kmt16, kmt17, kmt18, kfpan, kbpan
+    double precision:: kmt12, kmt13, kmt14, kmt15, kmt16, kmt17, kmt18, kfpan, kbpan, kch3o2
     double precision:: fcc,krc,fcd,krd,fc2,fc1,fc3,fc4,kr1,kr2,kr3,kr4
     double precision:: fc7,fc8,fc9,fc10,fc13,fc14,kr7,kr8,kr9,kr10,kr13,kr14
     double precision:: kc0, kci,kd0,kdi,fd,k10,k1i,f1,k20,k2i,k30,k3i,f3
@@ -30,9 +30,9 @@ subroutine mechanism_rates(p,t,y,mnsp)
     double precision :: dec
     double precision::  photoRateAtT
     double precision:: blh, pressure, dummy
-	
-	include 'modelConfiguration/mechanism-rate-declarations.f'
-	
+
+    include 'modelConfiguration/mechanism-rate-declarations.f'
+
     call ro2sum(ro2, y)
     dummy = y(1)
 
@@ -40,7 +40,7 @@ subroutine mechanism_rates(p,t,y,mnsp)
 
     call getEnvVarsAtT(t,temp,rh,h2o,dec,pressure,m,blh,dilute,jfac,roofOpen)
 
-	call atmosphere(O2, N2,m)
+    call atmosphere(O2, N2,m)
    
 
 
@@ -88,6 +88,10 @@ subroutine mechanism_rates(p,t,y,mnsp)
     ! * KROSEC  : RO(secondary)     = PRODUCTS
     ! * MCM PROTOCOL 2001
     KROSEC    = 1.80D-14*EXP(-260/TEMP)
+    ! *
+    ! *
+    ! *
+    KCH3O2    = 1.03D-13 * EXP(365 / TEMP)
     !
     ! * *** COMPLEX RATE COEFFICIENTS *****                     *
     !
